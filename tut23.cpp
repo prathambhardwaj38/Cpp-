@@ -12,6 +12,7 @@ class shop{
 private:
     string itemName[10];
     int itemID[10];
+    
     int itemPrice[10];
     int counter;
     int numOfEntries;
