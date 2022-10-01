@@ -1,11 +1,11 @@
 //*****Constructors In C++*****//
 /*
-Constructors are special functions of a class which have the same name as the class.
-They are special in the sense that they're automatically invoked whenever a class object is created .
-They are used for initializing values generally  but can also be used to perform some specific default operations as needed.
-They do not have a return type so they can't return any values, but they can have default arguments. 
-Their addresses cannot be referenced.
-They need to be declared within the public section/scope.
+1.Constructors are special functions of a class which have the same name as the class.
+2.They are special in the sense that they're automatically invoked whenever a class object is created .
+3.They are used for initializing values generally  but can also be used to perform some specific default operations as needed.
+4.They do not have a return type so they can't return any values, but they can have default arguments. 
+5.Their addresses cannot be referenced.
+6.They need to be declared within the public section/scope.
 */
 
 #include <iostream>
@@ -23,7 +23,7 @@ class complex{
 
 int complex::count;                     //Static variables need to be declared outside the class as well
 
-complex :: complex(void){               //Defining the default functions to perform whenever an object is created 
+complex :: complex(void){               //Defining the default functions to perform whenever an object is created, default constructor takes no parameters 
     count++;
     real=0;
     imaginary=0;
