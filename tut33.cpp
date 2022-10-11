@@ -33,11 +33,11 @@ class bankDeposit{
             if (R>=1)
             {
                 r=R;
-                bankDeposit(p,r,t);         //Here, we can also do bankDeposit(p, int(R), t) to directly call the int type overload function without creating an extra variable, making use of "typecasting" more efficiently 
+                new (this) bankDeposit(p,r,t);         //Here, we can also do bankDeposit(p, int(R), t) to directly call the int type overload function without creating an extra variable, making use of "typecasting" more efficiently 
             }
             else
                 //cout<<p<<endl<<R<<endl<<t<<endl; ////////
-                bankDeposit(p,R,t);
+                new (this) bankDeposit(p,R,t);        // new (this) is something that lets us resuse the current constructor, if we didn't use it calling a constructor alone would create a new temp object
         }
         bankDeposit(int p,int r, int t){
             //cout<<"int type was called"; ///////
@@ -55,7 +55,7 @@ class bankDeposit{
                 //cout<<p<<endl<<principal<<endl;
                 interestRate=r;
                 timePeriod=t;
-                cout<<principal<<endl<<interestRate<<endl<<timePeriod<<endl;  ////////
+                //cout<<principal<<endl<<interestRate<<endl<<timePeriod<<endl;  ////////
             }
             else
             {
@@ -70,21 +70,23 @@ class bankDeposit{
                 interestRate=r;
                 timePeriod=t; 
             }
+            //cout<<&principal<<endl<<&interestRate<<endl<<&timePeriod<<endl;
         }
+
         void display(void);
 };
 int bankDeposit :: count;
 
 void bankDeposit :: display(void){
-    cout<<principal<<endl<<interestRate<<endl<<timePeriod<<endl;      ////////
-    finalAmount=calculateAmount(principal, interestRate, timePeriod);
+    //cout<<&principal<<endl<<&interestRate<<endl<<&timePeriod<<endl;      ////////
+    finalAmount=calculateAmount(principal, interestRate, timePeriod);   //This is where its going wrong 
     cout<<"The principal was "<<principal<<endl
         <<"The interest rate applied was "<<interestRate<<endl
         <<"Hence, the final amount comes out to be "<<finalAmount<<endl;
 }
 
 float calculateAmount(int p, float r, int t){
-    //cout<<p<<endl<<r<<endl<<t<<endl;                  ////////This is where its going wrong 
+    //cout<<p<<endl<<r<<endl<<t<<endl;                  
     float amount;
     amount = p*(1+r);
     return amount;
@@ -124,4 +126,5 @@ I wanted to write the code in such a manner that :
 1. In C++, when using a number, by default its assigned the type - double 
 2.//Since i want a floating result, I'll first have to type cast the variable being operated on into float data type
 3. While using comparison operators, (0<r<1) is the wrong format and compiler will only evaluate 0<r, correct: (0<r && r<1)
+4. We can't simply call constructors like standalone functions, they are called automatically and signify creation of an object, so if we try to call them like a func, it'll just create a new temp object
 */
